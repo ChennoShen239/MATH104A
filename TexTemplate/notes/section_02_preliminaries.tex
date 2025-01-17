@@ -1,0 +1,126 @@
+\section{Preliminaries on Sets, Mappings, and Relations}
+
+\begin{definitionbox}{Set Membership}
+Let $A$ be a set. For an element $x$:
+\begin{itemize}
+    \item $x \in A$ denotes $x$ is a member of $A$
+    \item $x \notin A$ denotes $x$ is not a member of $A$
+\end{itemize}
+Sets are typically denoted by $\{x \mid \text{condition}\}$, representing all elements satisfying the condition.
+\end{definitionbox}
+
+\begin{definitionbox}{Set Equality and Subset}
+Two sets are equal if and only if they have exactly the same members.
+
+For sets $A$ and $B$:
+\begin{itemize}
+    \item $A \subseteq B$ means every member of $A$ is a member of $B$
+    \item $A$ is a proper subset of $B$ if $A \subseteq B$ and $A \neq B$
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Set Operations}
+For sets $A$ and $B$:
+\begin{itemize}
+    \item Union: $A \cup B = \{x \mid x \in A \text{ or } x \in B\}$
+    \item Intersection: $A \cap B = \{x \mid x \in A \text{ and } x \in B\}$
+    \item Complement: $B \setminus A = \{x \mid x \in B \text{ and } x \notin A\}$
+\end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{De Morgan's Laws}
+For a family of sets $\mathcal{F}$ and a reference set $X$:
+\begin{align*}
+    X \setminus \left(\bigcup_{F \in \mathcal{F}} F\right) &= \bigcap_{F \in \mathcal{F}} (X \setminus F) \\
+    X \setminus \left(\bigcap_{F \in \mathcal{F}} F\right) &= \bigcup_{F \in \mathcal{F}} (X \setminus F)
+\end{align*}
+\end{theorembox}
+
+\subsection{Mappings and Functions}
+
+\begin{definitionbox}{Mapping}
+A mapping (or function) $f: A \to B$ is a correspondence that assigns to each $x \in A$ a unique $y \in B$, denoted $f(x)$.
+\begin{itemize}
+    \item Domain: The set $A$
+    \item Image/Range: $f(A) = \{b \in B \mid \exists a \in A, f(a) = b\}$
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Function Types}
+\begin{itemize}
+    \item Onto (Surjective): $f(A) = B$
+    \item One-to-One (Injective): $f(a_1) = f(a_2) \implies a_1 = a_2$
+    \item Invertible (Bijective): Both one-to-one and onto
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Function Composition}
+For mappings $f: A \to B$ and $g: B \to C$, the composition $g \circ f: A \to C$ is defined by $(g \circ f)(x) = g(f(x))$.
+\end{definitionbox}
+
+\subsection{Relations}
+
+\begin{definitionbox}{Relation}
+A relation $R$ on a set $X$ is a subset of $X \times X$. 
+\begin{itemize}
+    \item Reflexive: $\forall x \in X, xRx$
+    \item Symmetric: $x R y \implies y R x$
+    \item Transitive: $x R y \text{ and } y R z \implies x R z$
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Equivalence Relation}
+An equivalence relation is a relation that is reflexive, symmetric, and transitive.
+
+For an equivalence relation $R$ on $X$:
+\begin{itemize}
+    \item Equivalence class of $x$: $[x]_R = \{y \in X \mid xRy\}$
+    \item Quotient set: $X/R = \{[x]_R \mid x \in X\}$
+\end{itemize}
+\end{definitionbox}
+
+\subsection{Axiom of Choice and Zorn's Lemma}
+
+\begin{definitionbox}{Choice Function}
+A choice function on a family $\mathcal{F}$ of non-empty sets is a function $f: \mathcal{F} \to \bigcup_{F \in \mathcal{F}} F$ such that $f(F) \in F$ for all $F \in \mathcal{F}$.
+\end{definitionbox}
+
+\begin{theorembox}{Axiom of Choice}
+For any non-empty collection of non-empty sets, there exists a choice function.
+\end{theorembox}
+
+\begin{definitionbox}{Partial Ordering}
+A relation $\preceq$ on a set $X$ is a partial ordering if it is:
+\begin{itemize}
+    \item Reflexive: $x \preceq x$
+    \item Antisymmetric: $x \preceq y \text{ and } y \preceq x \implies x = y$
+    \item Transitive: $x \preceq y \text{ and } y \preceq z \implies x \preceq z$
+\end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{Zorn's Lemma}
+If a partially ordered set has an upper bound for every totally ordered subset, then it contains a maximal element.
+\end{theorembox}
+
+\begin{note}
+Zorn's Lemma is equivalent to the Axiom of Choice and will be crucial in proving several important theorems in advanced mathematics.
+\end{note}
+
+\subsection{Cardinality and Set Comparisons}
+
+\begin{definitionbox}{Cardinality}
+Two sets $A$ and $B$ are said to be equipotent (or have the same cardinality) if there exists a bijective mapping $f: A \to B$. 
+
+Key properties:
+\begin{itemize}
+    \item Equipotence is an equivalence relation on the collection of sets
+    \item $|A| = |B|$ if and only if there exists a bijection between $A$ and $B$
+    \item Finite sets have cardinality equal to the number of their elements
+\end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{Cantor-Bernstein Theorem}
+If there exist injective functions $f: A \to B$ and $g: B \to A$, then there exists a bijection between $A$ and $B$. 
+
+Symbolically, if $|A| \leq |B|$ and $|B| \leq |A|$, then $|A| = |B|$.
+\end{theorembox}
