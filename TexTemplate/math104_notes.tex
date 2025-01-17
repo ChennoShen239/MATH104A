@@ -1,0 +1,279 @@
+% Math Class Notes
+% Prepared by Chen Gao
+% SPDX-License-Identifier: MIT
+
+\documentclass[12pt,a4paper]{article}
+
+\input{preamble}
+\usepackage{libertine}
+% Hyperref configuration for better TOC and cross-referencing
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Mathematical Analysis Class Notes},
+    pdfauthor={Chen Gao},
+    pdfpagemode=FullScreen,
+}
+
+\title{Introduction to Analysis}
+\author{Chen Gao}
+\date{Spring 2025}
+
+\begin{document}
+
+% Vertical centering for titlepage
+\newgeometry{margin=1in}
+\begin{titlepage}
+    \begin{center}
+        \vspace*{\fill}
+        
+        \huge\textbf{Introduction to Analysis}
+        
+        \vspace{1cm}
+        
+        \Large{Chen Gao}
+        
+        \vspace{1cm}
+        
+        \large{Spring 2025}
+        
+        \vspace{2cm}
+        
+        \begin{tabular}{ll}
+        \textbf{Course:} & MATH 104A \\
+        \textbf{Instructor:} & Professor [who] \\
+        \textbf{Institution:} & University of California, Berkeley \\
+        \textbf{Semester:} & Spring \the\year
+        \end{tabular}
+        
+        \vspace*{\fill}
+    \end{center}
+\end{titlepage}
+\restoregeometry
+
+% Ensure proper TOC generation
+\newpage
+\tableofcontents
+\newpage
+
+\section{Course Overview}
+\begin{note}
+    These notes compile key concepts, theorems, and insights from the Mathematical Analysis course. 
+    They serve as a comprehensive reference for understanding advanced mathematical principles.
+\end{note}
+
+\section{Preliminaries on Sets, Mappings, and Relations}
+
+\begin{definitionbox}{Set Membership}
+Let $A$ be a set. For an element $x$:
+\begin{itemize}
+    \item $x \in A$ denotes $x$ is a member of $A$
+    \item $x \notin A$ denotes $x$ is not a member of $A$
+\end{itemize}
+Sets are typically denoted by $\{x \mid \text{condition}\}$, representing all elements satisfying the condition.
+\end{definitionbox}
+
+\begin{definitionbox}{Set Equality and Subset}
+Two sets are equal if and only if they have exactly the same members.
+
+For sets $A$ and $B$:
+\begin{itemize}
+    \item $A \subseteq B$ means every member of $A$ is a member of $B$
+    \item $A$ is a proper subset of $B$ if $A \subseteq B$ and $A \neq B$
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Set Operations}
+For sets $A$ and $B$:
+\begin{itemize}
+    \item Union: $A \cup B = \{x \mid x \in A \text{ or } x \in B\}$
+    \item Intersection: $A \cap B = \{x \mid x \in A \text{ and } x \in B\}$
+    \item Complement: $B \setminus A = \{x \mid x \in B \text{ and } x \notin A\}$
+\end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{De Morgan's Laws}
+For a family of sets $\mathcal{F}$ and a reference set $X$:
+\begin{align*}
+    X \setminus \left(\bigcup_{F \in \mathcal{F}} F\right) &= \bigcap_{F \in \mathcal{F}} (X \setminus F) \\
+    X \setminus \left(\bigcap_{F \in \mathcal{F}} F\right) &= \bigcup_{F \in \mathcal{F}} (X \setminus F)
+\end{align*}
+\end{theorembox}
+
+\subsection{Mappings and Functions}
+
+\begin{definitionbox}{Mapping}
+A mapping (or function) $f: A \to B$ is a correspondence that assigns to each $x \in A$ a unique $y \in B$, denoted $f(x)$.
+\begin{itemize}
+    \item Domain: The set $A$
+    \item Image/Range: $f(A) = \{b \in B \mid \exists a \in A, f(a) = b\}$
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Function Types}
+\begin{itemize}
+    \item Onto (Surjective): $f(A) = B$
+    \item One-to-One (Injective): $f(a_1) = f(a_2) \implies a_1 = a_2$
+    \item Invertible (Bijective): Both one-to-one and onto
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Function Composition}
+For mappings $f: A \to B$ and $g: B \to C$, the composition $g \circ f: A \to C$ is defined by $(g \circ f)(x) = g(f(x))$.
+\end{definitionbox}
+
+\subsection{Relations}
+
+\begin{definitionbox}{Relation}
+A relation $R$ on a set $X$ is a subset of $X \times X$. 
+\begin{itemize}
+    \item Reflexive: $\forall x \in X, xRx$
+    \item Symmetric: $x R y \implies y R x$
+    \item Transitive: $x R y \text{ and } y R z \implies x R z$
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Equivalence Relation}
+An equivalence relation is a relation that is reflexive, symmetric, and transitive.
+
+For an equivalence relation $R$ on $X$:
+\begin{itemize}
+    \item Equivalence class of $x$: $[x]_R = \{y \in X \mid xRy\}$
+    \item Quotient set: $X/R = \{[x]_R \mid x \in X\}$
+\end{itemize}
+\end{definitionbox}
+
+\subsection{Axiom of Choice and Zorn's Lemma}
+
+\begin{definitionbox}{Choice Function}
+A choice function on a family $\mathcal{F}$ of non-empty sets is a function $f: \mathcal{F} \to \bigcup_{F \in \mathcal{F}} F$ such that $f(F) \in F$ for all $F \in \mathcal{F}$.
+\end{definitionbox}
+
+\begin{theorembox}{Axiom of Choice}
+For any non-empty collection of non-empty sets, there exists a choice function.
+\end{theorembox}
+
+\begin{definitionbox}{Partial Ordering}
+A relation $\preceq$ on a set $X$ is a partial ordering if it is:
+\begin{itemize}
+    \item Reflexive: $x \preceq x$
+    \item Antisymmetric: $x \preceq y \text{ and } y \preceq x \implies x = y$
+    \item Transitive: $x \preceq y \text{ and } y \preceq z \implies x \preceq z$
+\end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{Zorn's Lemma}
+If a partially ordered set has an upper bound for every totally ordered subset, then it contains a maximal element.
+\end{theorembox}
+
+\begin{note}
+Zorn's Lemma is equivalent to the Axiom of Choice and will be crucial in proving several important theorems in advanced mathematics.
+\end{note}
+
+\subsection{Cardinality and Set Comparisons}
+
+\begin{definitionbox}{Cardinality}
+Two sets $A$ and $B$ are said to be equipotent (or have the same cardinality) if there exists a bijective mapping $f: A \to B$. 
+
+Key properties:
+\begin{itemize}
+    \item Equipotence is an equivalence relation on the collection of sets
+    \item $|A| = |B|$ if and only if there exists a bijection between $A$ and $B$
+    \item Finite sets have cardinality equal to the number of their elements
+\end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{Cantor-Bernstein Theorem}
+If there exist injective functions $f: A \to B$ and $g: B \to A$, then there exists a bijection between $A$ and $B$. 
+
+Symbolically, if $|A| \leq |B|$ and $|B| \leq |A|$, then $|A| = |B|$.
+\end{theorembox}
+
+\subsection{Countable and Uncountable Sets}
+
+\begin{definitionbox}{Countable Sets}
+A set $A$ is:
+\begin{itemize}
+    \item Finite if $|A| < \aleph_0$
+    \item Countably infinite if $|A| = \aleph_0$
+    \item Countable if it is either finite or countably infinite
+    \item Uncountable if it is not countable
+\end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{Countability Properties}
+\begin{itemize}
+    \item The set of natural numbers $\mathbb{N}$ is countably infinite
+    \item The set of integers $\mathbb{Z}$ is countably infinite
+    \item The set of rational numbers $\mathbb{Q}$ is countably infinite
+    \item The set of real numbers $\mathbb{R}$ is uncountable
+\end{itemize}
+\end{theorembox}
+
+\subsection{Generalized Cartesian Product}
+
+\begin{definitionbox}{Generalized Cartesian Product}
+For a family of sets $\{E_{\lambda}\}_{\lambda\in\Lambda}$ indexed by $\Lambda$, the Cartesian product is defined as:
+
+$$\prod_{\lambda\in\Lambda} E_{\lambda} = \left\{f: \Lambda \to \bigcup_{\lambda\in\Lambda} E_{\lambda} \mid \forall \lambda \in \Lambda, f(\lambda) \in E_{\lambda}\right\}$$
+\end{definitionbox}
+
+\begin{theorembox}{Cartesian Product Properties}
+\begin{itemize}
+    \item If $\Lambda$ is finite and each $E_{\lambda}$ is non-empty, then $\prod_{\lambda\in\Lambda} E_{\lambda}$ is non-empty
+    \item The Axiom of Choice is equivalent to the statement that the Cartesian product of a non-empty family of non-empty sets is non-empty
+\end{itemize}
+\end{theorembox}
+
+\subsection{Well-Ordering Principle}
+
+\begin{theorembox}{Well-Ordering Theorem}
+Every set can be well-ordered. That is, for every set $X$, there exists a total order $\leq$ on $X$ such that every non-empty subset of $X$ has a least element.
+
+This theorem is equivalent to the Axiom of Choice.
+\end{theorembox}
+
+\subsection{Foundations of Set Theory}
+
+\begin{definitionbox}{Zermelo-Fraenkel Axioms}
+Set theory is formally grounded in the Zermelo-Fraenkel (ZF) axiom system, which provides a rigorous foundation for mathematical reasoning about sets:
+
+\begin{itemize}
+    \item \textbf{Axiom of Extensionality:} Two sets are equal if and only if they have exactly the same elements
+    \item \textbf{Axiom of Pairing:} For any two sets, there exists a set containing exactly those two sets
+    \item \textbf{Axiom of Union:} For any collection of sets, there exists a set that contains all elements that belong to at least one set in the collection
+    \item \textbf{Axiom of Power Set:} For any set, there exists a set containing all possible subsets of that set
+\end{itemize}
+
+The Axiom of Choice (AC) can be added to ZF to form ZFC, the standard foundation for most mathematical reasoning.
+\end{definitionbox}
+
+\begin{definitionbox}{Parametrization of Sets}
+For a set $\Lambda$ and a family of sets $\{E_{\lambda}\}_{\lambda\in\Lambda}$, the parametrization provides a systematic way to index sets:
+
+\begin{itemize}
+    \item $\Lambda$ is called the \textit{index set}
+    \item Each $E_{\lambda}$ is associated with a unique $\lambda \in \Lambda$
+    \item Different parametrizations of the same family may yield different mathematical structures
+\end{itemize}
+
+Example: Let $\Lambda = \{1,2\}$ and define $E_1 = \{a,b\}$, $E_2 = \{c,d\}$. Then $\{E_{\lambda}\}_{\lambda\in\Lambda} = \{\{a,b\}, \{c,d\}\}$.
+\end{definitionbox}
+
+\begin{theorembox}{Parametrized Cartesian Product Properties}
+For a parametrized family $\{E_{\lambda}\}_{\lambda\in\Lambda}$:
+
+\begin{itemize}
+    \item The Cartesian product depends critically on the specific parametrization
+    \item Two different indexings of the same underlying sets can produce different Cartesian products
+    \item The choice of index set $\Lambda$ is crucial in defining the product structure
+\end{itemize}
+\end{theorembox}
+
+\begin{note}
+The subtleties of set parametrization highlight the depth and complexity inherent in foundational set theory, demonstrating how seemingly simple concepts can reveal profound mathematical structures.
+\end{note}
+
+\end{document}
