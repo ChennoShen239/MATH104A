@@ -1,32 +1,45 @@
-# MATH104A 数学笔记仓库
+# MATH104A Course Notes
 
-本仓库用于存储MATH104课程的笔记和作业模板。
+This repository contains course notes and homework for MATH104A at UC Berkeley.
 
-## 目录结构
+## Project Structure
 
-- `TexTemplate/`: 包含LaTeX模板文件
-  - `math104_notes.tex`: 课程笔记模板
-  - `math104_hw.tex`: 作业模板
-  - `preamble.tex`: LaTeX导言区设置
-  - `compile_tex.sh`: LaTeX编译脚本
+```
+.
+├── README.md
+└── TexTemplate/
+    ├── compile_tex.sh        # LaTeX compilation script
+    ├── main.tex              # Main LaTeX document
+    ├── math104_hw.pdf        # Homework PDF
+    ├── math104_hw.tex        # Homework LaTeX source
+    ├── math104_notes.pdf     # Course notes PDF
+    ├── math104_notes.tex     # Course notes LaTeX source
+    ├── notes/                # Individual note sections
+    │   ├── section_01_course_overview.tex
+    │   └── section_02_preliminaries.tex
+    ├── preamble.tex          # LaTeX preamble
+    └── template/             # LaTeX templates
+        ├── homework.pdf
+        ├── homework.tex
+        ├── template.pdf
+        └── template.tex
+```
 
-## 使用方法
+## Compilation
 
-1. 克隆本仓库：
-   ```bash
-   git clone git@github.com:ChennoShen239/MATH104A.git
-   ```
+To compile the LaTeX documents:
 
-2. 进入TexTemplate目录：
-   ```bash
-   cd MATH104A/TexTemplate
-   ```
+```bash
+cd TexTemplate
+./compile_tex.sh
+```
 
-3. 编译LaTeX文件：
-   ```bash
-   ./compile_tex.sh math104_notes.tex
-   ```
+## Usage
 
-## 贡献指南
+1. Edit the LaTeX files in the `TexTemplate/notes/` directory
+2. Run the compilation script to generate updated PDFs
+3. Commit changes and push to GitHub
 
-欢迎通过Pull Request提交改进建议或笔记更新。
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
