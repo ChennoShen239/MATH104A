@@ -1,0 +1,243 @@
+\section{The Real Numbers: Sets, Sequences, and Functions}
+
+\begin{note}
+We establish the fundamental properties of real numbers through axioms and derive key results about sets, sequences, and functions.
+\end{note}
+
+\subsection{The Field, Positivity, and Completeness Axioms}
+
+\begin{theorembox}{Field Axioms}
+The real numbers $\mathbb{R}$ form a field under addition and multiplication, satisfying:
+\begin{enumerate}[label=(\roman*)]
+\item Commutativity: $a + b = b + a$, $ab = ba$
+\item Associativity: $(a + b) + c = a + (b + c)$, $(ab)c = a(bc)$
+\item Identity: $a + 0 = a$, $a \cdot 1 = a$
+\item Inverses: For each $a$, there exists $-a$ with $a + (-a) = 0$
+\item For each $a \neq 0$, there exists $a^{-1}$ with $aa^{-1} = 1$
+\item Distributivity: $a(b + c) = ab + ac$
+\item $1 \neq 0$
+\end{enumerate}
+\end{theorembox}
+
+\begin{theorembox}{Positivity Axioms}
+There exists a set $\mathcal{P} \subset \mathbb{R}$ of positive numbers such that:
+\begin{enumerate}[label=(\roman*)]
+\item If $a,b \in \mathcal{P}$, then $ab \in \mathcal{P}$ and $a + b \in \mathcal{P}$
+\item For each $a \in \mathbb{R}$, exactly one of $a \in \mathcal{P}$, $-a \in \mathcal{P}$, or $a = 0$ holds
+\end{enumerate}
+\end{theorembox}
+
+\begin{definitionbox}{Order Relations}
+For real numbers $a$ and $b$, we define:
+\[ a > b \iff a - b \in \mathcal{P}, \quad a \geq b \iff a > b \text{ or } a = b \]
+\end{definitionbox}
+
+\begin{theorembox}{Properties of Order}
+For real numbers $a$, $b$, and $c$:
+\begin{enumerate}[label=(\roman*)]
+\item If $a > b$ and $b > c$, then $a > c$ (transitivity)
+\item If $a > b$, then $a + c > b + c$ (translation invariance)
+\item If $a > b$ and $c > 0$, then $ac > bc$ (positive scaling)
+\end{enumerate}
+\end{theorembox}
+
+\begin{definitionbox}{Absolute Value}
+For a real number $x$, we define:
+\[ |x| = \max\{x,-x\} \]
+\end{definitionbox}
+
+\begin{theorembox}{Triangle Inequality}
+For all real numbers $a$ and $b$:
+\[ |a + b| \leq |a| + |b| \]
+\end{theorembox}
+
+\begin{definitionbox}{Bounded Sets}
+A set $E \subset \mathbb{R}$ is bounded above if there exists $M \in \mathbb{R}$ such that $x \leq M$ for all $x \in E$.
+Similarly, $E$ is bounded below if there exists $m \in \mathbb{R}$ such that $m \leq x$ for all $x \in E$.
+$E$ is bounded if it is both bounded above and below.
+\end{definitionbox}
+
+\begin{theorembox}{Completeness Axiom}
+Every non-empty set of real numbers that is bounded above has a least upper bound.
+\end{theorembox}
+
+\subsection{Natural and Rational Numbers}
+
+\begin{definitionbox}{Inductive Set}
+A set $E \subset \mathbb{R}$ is inductive if $1 \in E$ and $x + 1 \in E$ whenever $x \in E$.
+\end{definitionbox}
+
+\begin{definitionbox}{Natural Numbers}
+The set $\mathbb{N}$ of natural numbers is the intersection of all inductive subsets of $\mathbb{R}$.
+\end{definitionbox}
+
+\begin{theorembox}{Mathematical Induction}
+Let $S(n)$ be a statement for each $n \in \mathbb{N}$. If $S(1)$ is true and $S(k) \implies S(k+1)$ for all $k \in \mathbb{N}$, then $S(n)$ is true for all $n \in \mathbb{N}$.
+\end{theorembox}
+
+\begin{theorembox}{Theorem 1}
+Every non-empty set of natural numbers has a smallest member.
+\end{theorembox}
+
+\begin{definitionbox}{Integers}
+The set $\mathbb{Z}$ of integers consists of $0$, the natural numbers, and their negatives.
+\end{definitionbox}
+
+\begin{definitionbox}{Rational Numbers}
+The set $\mathbb{Q}$ of rational numbers consists of quotients $\frac{m}{n}$ where $m,n \in \mathbb{Z}$ and $n \neq 0$.
+\end{definitionbox}
+
+\begin{theorembox}{Archimedean Property}
+For any positive real numbers $a$ and $b$, there exists $n \in \mathbb{N}$ such that $na > b$.
+\end{theorembox}
+
+\begin{theorembox}{Theorem 2}
+The rational numbers are dense in $\mathbb{R}$. That is, between any two distinct real numbers lies a rational number.
+\end{theorembox}
+
+\begin{theorembox}{Irrationality of $\sqrt{2}$}
+The number $\sqrt{2}$ is irrational.
+\end{theorembox}
+
+\subsection{Countable and Uncountable Sets}
+
+\begin{definitionbox}{Equipotence}
+Sets $A$ and $B$ are equipotent if there exists a bijection $f: A \to B$.
+\end{definitionbox}
+
+\begin{definitionbox}{Countability}
+A set is countable if it is either finite or equipotent to $\mathbb{N}$. A set that is not countable is called uncountable.
+\end{definitionbox}
+
+\begin{theorembox}{Theorem 3}
+A subset of a countable set is countable.
+\end{theorembox}
+
+\begin{theorembox}{Corollary 4}
+The following sets are countably infinite:
+\begin{enumerate}[label=(\roman*)]
+\item For each natural number $n$, the Cartesian product $\mathbb{N} \times \cdots \times \mathbb{N}$ ($n$ times)
+\item The set of rational numbers $\mathbb{Q}$
+\end{enumerate}
+\end{theorembox}
+
+\begin{theorembox}{Theorem 5}
+A non-empty set is countable if and only if it is the image of a function whose domain is a non-empty countable set.
+\end{theorembox}
+
+\begin{theorembox}{Corollary 6}
+The union of a countable collection of countable sets is countable.
+\end{theorembox}
+
+\begin{theorembox}{Theorem 7}
+A non-degenerate interval of real numbers is uncountable.
+\end{theorembox}
+
+\subsection{Open Sets, Closed Sets, and Borel Sets}
+
+\begin{definitionbox}{Intervals}
+For real numbers $a < b$, we define:
+\begin{align*}
+(a,b) &= \{x \in \mathbb{R} : a < x < b\} \\
+[a,b] &= \{x \in \mathbb{R} : a \leq x \leq b\} \\
+[a,b) &= \{x \in \mathbb{R} : a \leq x < b\} \\
+(a,b] &= \{x \in \mathbb{R} : a < x \leq b\}
+\end{align*}
+\end{definitionbox}
+
+\begin{definitionbox}{Open Set}
+A set $\mathcal{O}$ of real numbers is called open provided for each $x \in \mathcal{O}$, there is an $r > 0$ for which $(x-r, x+r) \subset \mathcal{O}$.
+\end{definitionbox}
+
+\begin{theorembox}{Properties of Open Sets}
+\begin{enumerate}[label=(\roman*)]
+\item $\mathbb{R}$ and $\emptyset$ are open
+\item The intersection of any finite collection of open sets is open
+\item The union of any collection of open sets is open
+\end{enumerate}
+\end{theorembox}
+
+\begin{definitionbox}{Closure Points}
+A point $x$ is a point of closure of a set $E$ if every open interval containing $x$ also contains a point of $E$.
+The closure of $E$, denoted $\overline{E}$, is the set of all points of closure of $E$.
+\end{definitionbox}
+
+\begin{definitionbox}{Closed Set}
+A set $E$ is closed if it contains all its points of closure (i.e., if $E = \overline{E}$).
+\end{definitionbox}
+
+\begin{theorembox}{Properties of Closed Sets}
+\begin{enumerate}[label=(\roman*)]
+\item $\mathbb{R}$ and $\emptyset$ are closed
+\item The union of any finite collection of closed sets is closed
+\item The intersection of any collection of closed sets is closed
+\end{enumerate}
+\end{theorembox}
+
+\begin{theorembox}{Heine-Borel}
+A set of real numbers is compact if and only if it is closed and bounded.
+\end{theorembox}
+
+\subsection{Sequences and Series}
+
+\begin{definitionbox}{Convergence}
+A sequence $\{a_n\}$ converges to $a$ if for every $\epsilon > 0$ there exists $N$ such that:
+\[ \text{if } n \geq N \text{ then } |a_n - a| < \epsilon \]
+\end{definitionbox}
+
+\begin{theorembox}{Properties of Limits}
+For convergent sequences $\{a_n\}$ and $\{b_n\}$ and real numbers $\alpha$ and $\beta$:
+\[ \lim_{n \to \infty} [\alpha a_n + \beta b_n] = \alpha \lim_{n \to \infty} a_n + \beta \lim_{n \to \infty} b_n \]
+Moreover, if $a_n \leq b_n$ for all $n$, then:
+\[ \lim_{n \to \infty} a_n \leq \lim_{n \to \infty} b_n \]
+\end{theorembox}
+
+\begin{theorembox}{Monotone Convergence}
+A monotone sequence of real numbers converges if and only if it is bounded.
+\end{theorembox}
+
+\begin{theorembox}{Bolzano-Weierstrass}
+Every bounded sequence of real numbers has a convergent subsequence.
+\end{theorembox}
+
+\begin{definitionbox}{Cauchy Sequence}
+A sequence $\{a_n\}$ is Cauchy if for each $\epsilon > 0$ there exists an index $N$ such that:
+\[ \text{if } n,m \geq N \text{ then } |a_m - a_n| < \epsilon \]
+\end{definitionbox}
+
+\begin{theorembox}{Cauchy Criterion}
+A sequence of real numbers converges if and only if it is Cauchy.
+\end{theorembox}
+
+\subsection{Continuous Functions}
+
+\begin{definitionbox}{Continuity}
+A function $f$ is continuous at $x \in E$ if for each $\epsilon > 0$, there exists $\delta > 0$ such that:
+\[ \text{if } x' \in E \text{ and } |x'-x| < \delta \text{ then } |f(x')-f(x)| < \epsilon \]
+\end{definitionbox}
+
+\begin{theorembox}{Characterization of Continuity}
+For a function $f$ defined on $E$, the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $f$ is continuous on $E$
+\item For each open set $\mathcal{O}$, $f^{-1}(\mathcal{O}) = E \cap \mathcal{U}$ where $\mathcal{U}$ is open
+\item For any sequence $\{x_n\}$ in $E$ converging to $x \in E$, $\{f(x_n)\}$ converges to $f(x)$
+\end{enumerate}
+\end{theorembox}
+
+\begin{theorembox}{Extreme Value}
+A continuous real-valued function on a non-empty closed, bounded set takes a minimum and maximum value.
+\end{theorembox}
+
+\begin{theorembox}{Intermediate Value}
+Let $f$ be continuous on $[a,b]$ with $f(a) < c < f(b)$. Then there exists $x_0 \in (a,b)$ such that $f(x_0) = c$.
+\end{theorembox}
+
+\begin{definitionbox}{Uniform Continuity}
+A function $f$ on $E$ is uniformly continuous if for each $\epsilon > 0$, there exists a $\delta > 0$ such that for all $x,x'$ in $E$:
+\[ \text{if } |x-x'| < \delta \text{ then } |f(x)-f(x')| < \epsilon \]
+\end{definitionbox}
+
+\begin{theorembox}{Uniform Continuity on Compact Sets}
+A continuous real-valued function on a closed, bounded set is uniformly continuous.
+\end{theorembox} 

@@ -3,7 +3,20 @@
 # Color codes for pretty output
 GREEN='\033[0;32m'
 RED='\033[0;31m'
+YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
+
+# Default to release mode
+MODE="release"
+
+# Parse command line arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -d|--debug) MODE="debug"; shift ;;
+        *) tex_files+=("$1") ;;
+    esac
+    shift
+done
 
 # Array of files/patterns to exclude from compilation and cleanup
 EXCLUDE_FILES=(
@@ -14,7 +27,7 @@ EXCLUDE_FILES=(
 
 # Array of PDF files to keep
 KEEP_PDFS=(
-    "math104_notes.pdf"
+    "main.pdf"
     "math104_hw.pdf"
 )
 
@@ -45,22 +58,22 @@ compile_tex() {
     local tex_file="$1"
     local base_name=$(basename "$tex_file" .tex)
 
-    echo -e "${GREEN}Compiling ${tex_file}...${NC}"
-
-    # First pass: Initial compilation
-    pdflatex -interaction=nonstopmode "$tex_file" > /dev/null
-
-    # Second pass: Generate Table of Contents and References
-    pdflatex -interaction=nonstopmode "$tex_file" > /dev/null
-
-    # Optional: Compile bibliography if .bib file exists
-    if [ -f "${base_name}.bib" ]; then
-        bibtex "${base_name}" > /dev/null
-        pdflatex -interaction=nonstopmode "$tex_file" > /dev/null
+    if [[ "$MODE" == "debug" ]]; then
+        echo -e "${YELLOW}[DEBUG] Compiling ${tex_file} in debug mode...${NC}"
+    else
+        echo -e "${GREEN}Compiling ${tex_file}...${NC}"
     fi
 
-    # Final pass to ensure all references are correct
-    pdflatex -interaction=nonstopmode "$tex_file" > /dev/null
+    # Compilation options based on mode
+    if [[ "$MODE" == "debug" ]]; then
+        # Debug mode: more verbose, keep all intermediate files
+        pdflatex -interaction=nonstopmode "$tex_file"
+        pdflatex -interaction=nonstopmode "$tex_file"
+    else
+        # Release mode: quick, quiet compilation
+        pdflatex -interaction=batchmode -draftmode "$tex_file" > /dev/null
+        pdflatex -interaction=batchmode "$tex_file" > /dev/null
+    fi
 
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✓ Successfully compiled ${tex_file}${NC}"
@@ -86,35 +99,77 @@ cleanup_files() {
         ".synctex.gz"
     )
 
-    echo -e "${GREEN}Cleaning up intermediate files for ${tex_file}...${NC}"
+    if [[ "$MODE" == "release" ]]; then
+        echo -e "${GREEN}Cleaning up intermediate files for ${tex_file}...${NC}"
 
-    # Remove intermediate files, keeping only .tex and .pdf
-    for ext in "${extensions[@]}"; do
-        rm -f "${base_name}${ext}"
-    done
+        # Remove intermediate files, keeping only .tex and .pdf
+        for ext in "${extensions[@]}"; do
+            rm -f "${base_name}${ext}"
+        done
+    elif [[ "$MODE" == "debug" ]]; then
+        echo -e "${YELLOW}[DEBUG] Skipping cleanup for ${tex_file}${NC}"
+    fi
 }
 
 # Function to clean up project-wide PDFs
 clean_project_pdfs() {
-    echo -e "${GREEN}Cleaning up project-wide PDF files...${NC}"
-    
-    # Find and process all PDF files in the project
-    find .. -maxdepth 2 -type f -name "*.pdf" | while read -r pdf_file; do
-        # Check if the PDF should be kept
-        if ! should_keep_pdf "$(basename "$pdf_file")"; then
-            echo -e "${RED}Removing ${pdf_file}${NC}"
-            rm -f "$pdf_file"
-        fi
-    done
+    if [[ "$MODE" == "release" ]]; then
+        echo -e "${GREEN}Cleaning up project-wide PDF files...${NC}"
+        
+        # Find and process all PDF files in the project
+        find .. -maxdepth 2 -type f -name "*.pdf" | while read -r pdf_file; do
+            # Check if the PDF should be kept
+            if ! should_keep_pdf "$(basename "$pdf_file")"; then
+                echo -e "${RED}Removing ${pdf_file}${NC}"
+                rm -f "$pdf_file"
+            fi
+        done
+    fi
+}
+
+# Function to clean up unnecessary files
+cleanup_unnecessary_files() {
+    if [[ "$MODE" == "release" ]]; then
+        echo -e "${GREEN}Cleaning up unnecessary files...${NC}"
+
+        # LaTeX intermediate files to remove
+        local latex_intermediate_files=(
+            "*.fdb_latexmk"
+            "*.fls"
+            "*.xdv"
+            "*.log"
+            "*.aux"
+            "*.synctex.gz"
+        )
+
+        # Unnecessary template files to remove
+        local template_files=(
+            "template/template.pdf"
+            "template/template.tex"
+            "template/homework.tex"
+            "template/homework.pdf"
+        )
+
+        # Remove LaTeX intermediate files
+        for pattern in "${latex_intermediate_files[@]}"; do
+            find . -maxdepth 1 -type f -name "$pattern" -delete
+        done
+
+        # Remove template files
+        for file in "${template_files[@]}"; do
+            if [ -f "$file" ]; then
+                echo -e "${RED}Removing ${file}${NC}"
+                rm -f "$file"
+            fi
+        done
+    fi
 }
 
 # Main script logic
 main() {
-    # If no arguments provided, use default .tex files
-    if [ $# -eq 0 ]; then
+    # If no tex files specified, use default .tex files
+    if [ ${#tex_files[@]} -eq 0 ]; then
         tex_files=(*.tex)
-    else
-        tex_files=("$@")
     fi
 
     for file in "${tex_files[@]}"; do
@@ -132,9 +187,12 @@ main() {
 
     # Clean up project-wide PDFs
     clean_project_pdfs
+
+    # Clean up unnecessary files
+    cleanup_unnecessary_files
 }
 
-# Run the main function with all arguments
-main "$@"
+# Run the main function
+main
 
 exit 0 

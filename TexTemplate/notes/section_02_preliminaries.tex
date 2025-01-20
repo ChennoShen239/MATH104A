@@ -1,88 +1,145 @@
 \section{Preliminaries on Sets, Mappings, and Relations}
 
+\begin{note}
+In these preliminaries, we describe some notions regarding sets, mappings, and relations that will be used throughout the book. Our purpose is descriptive and the arguments given are directed toward plausibility and understanding rather than rigorous proof based on an axiomatic basis for set theory.
+\end{note}
+
+\subsection{Unions and Intersections of Sets}
+
 \begin{definitionbox}{Set Membership}
-Let $A$ be a set. For an element $x$:
-\begin{itemize}
-    \item $x \in A$ denotes $x$ is a member of $A$
-    \item $x \notin A$ denotes $x$ is not a member of $A$
-\end{itemize}
-Sets are typically denoted by $\{x \mid \text{condition}\}$, representing all elements satisfying the condition.
+For a set $A$, the membership of an element $x$ in $A$ is denoted by $x \in A$ and the nonmembership of $x$ in $A$ is denoted by $x \notin A$. 
+
+Sets are often denoted by $\{x \mid \text{statement about } x\}$, representing all elements for which the statement is true. Two sets are the same provided they have the same members.
 \end{definitionbox}
 
-\begin{definitionbox}{Set Equality and Subset}
-Two sets are equal if and only if they have exactly the same members.
+\begin{definitionbox}{Subset}
+Let $A$ and $B$ be sets. $A$ is a subset of $B$, denoted by $A \subseteq B$, provided each member of $A$ is a member of $B$. 
 
-For sets $A$ and $B$:
-\begin{itemize}
-    \item $A \subseteq B$ means every member of $A$ is a member of $B$
-    \item $A$ is a proper subset of $B$ if $A \subseteq B$ and $A \neq B$
-\end{itemize}
+A subset $A$ of $B$ is called a proper subset of $B$ provided $A \neq B$.
 \end{definitionbox}
 
 \begin{definitionbox}{Set Operations}
 For sets $A$ and $B$:
 \begin{itemize}
-    \item Union: $A \cup B = \{x \mid x \in A \text{ or } x \in B\}$
+    \item Union: $A \cup B = \{x \mid x \in A \text{ or } x \in B\}$ (in the nonexclusive sense)
     \item Intersection: $A \cap B = \{x \mid x \in A \text{ and } x \in B\}$
-    \item Complement: $B \setminus A = \{x \mid x \in B \text{ and } x \notin A\}$
+    \item Complement: $B \setminus A = \{x \mid x \in B, x \notin A\}$
+\end{itemize}
+
+If all sets are subsets of a reference set $X$, $X \setminus A$ is simply called the complement of $A$.
+\end{definitionbox}
+
+\begin{definitionbox}{Special Sets}
+\begin{itemize}
+    \item Empty set: A set with no members, denoted by $\textcircled{1}$
+    \item Non-empty set: A set that is not equal to the empty set
+    \item Singleton set: A set with a single member
+    \item Power set: For a set $X$, $\mathcal{P}(X)$ or $2^X$ is the set of all subsets of $X$
 \end{itemize}
 \end{definitionbox}
 
-\begin{theorembox}{De Morgan's Laws}
-For a family of sets $\mathcal{F}$ and a reference set $X$:
+\begin{definitionbox}{Generalized Set Operations}
+Let $\mathcal{F}$ be a collection of sets:
+\begin{itemize}
+    \item Union: $\bigcup_{F\in\mathcal{F}}F$ is the set of points that belong to at least one set in $\mathcal{F}$
+    \item Intersection: $\bigcap_{F\in\mathcal{F}}F$ is the set of points that belong to every set in $\mathcal{F}$
+\end{itemize}
+
+A collection of sets $\mathcal{F}$ is disjoint if the intersection of any two distinct sets in $\mathcal{F}$ is empty.
+\end{definitionbox}
+
+\begin{theorembox}{De Morgan's Identities}
+For a family $\mathcal{F}$ of sets and a reference set $X$:
 \begin{align*}
-    X \setminus \left(\bigcup_{F \in \mathcal{F}} F\right) &= \bigcap_{F \in \mathcal{F}} (X \setminus F) \\
-    X \setminus \left(\bigcap_{F \in \mathcal{F}} F\right) &= \bigcup_{F \in \mathcal{F}} (X \setminus F)
+    X \setminus \left[\bigcup_{F\in\mathcal{F}}F\right] &= \bigcap_{F\in\mathcal{F}}[X \setminus F] \\
+    X \setminus \left[\bigcap_{F\in\mathcal{F}}F\right] &= \bigcup_{F\in\mathcal{F}}[X \setminus F]
 \end{align*}
 \end{theorembox}
 
-\subsection{Mappings and Functions}
+\subsection{Mappings between Sets}
 
-\begin{definitionbox}{Mapping}
-A mapping (or function) $f: A \to B$ is a correspondence that assigns to each $x \in A$ a unique $y \in B$, denoted $f(x)$.
+\begin{definitionbox}{Mapping/Function}
+Given sets $A$ and $B$, a mapping (or function) $f: A \to B$ is a correspondence that assigns to each member of $A$ a member of $B$. 
+
+For each $x \in A$, $f(x)$ denotes the member of $B$ to which $x$ is assigned.
+\end{definitionbox}
+
+\begin{definitionbox}{Image and Domain}
+For a mapping $f: A \to B$ and a subset $A' \subseteq A$:
 \begin{itemize}
     \item Domain: The set $A$
-    \item Image/Range: $f(A) = \{b \in B \mid \exists a \in A, f(a) = b\}$
+    \item Image of $A'$: $f(A') = \{b \mid b = f(a) \text{ for some } a \in A'\}$
+    \item Range/Image of $f$: $f(A)$
 \end{itemize}
 \end{definitionbox}
 
 \begin{definitionbox}{Function Types}
 \begin{itemize}
     \item Onto (Surjective): $f(A) = B$
-    \item One-to-One (Injective): $f(a_1) = f(a_2) \implies a_1 = a_2$
-    \item Invertible (Bijective): Both one-to-one and onto
+    \item One-to-One (Injective): For each $b \in f(A)$, there is exactly one $a \in A$ such that $b = f(a)$
+    \item Invertible: Both one-to-one and onto, establishing a one-to-one correspondence
 \end{itemize}
 \end{definitionbox}
 
-\begin{definitionbox}{Function Composition}
-For mappings $f: A \to B$ and $g: B \to C$, the composition $g \circ f: A \to C$ is defined by $(g \circ f)(x) = g(f(x))$.
+\begin{definitionbox}{Inverse Mapping}
+For an invertible mapping $f: A \to B$:
+\begin{itemize}
+    \item $f^{-1}(b)$ is the unique $a \in A$ such that $f(a) = b$
+    \item $f^{-1}: B \to A$ is the inverse mapping
+\end{itemize}
+
+Two sets $A$ and $B$ are equipotent if there exists an invertible mapping from $A$ to $B$.
 \end{definitionbox}
 
-\subsection{Relations}
+\begin{definitionbox}{Function Composition}
+For mappings $f: A \to B$ and $g: C \to D$ where $f(A) \subseteq C$:
+\begin{itemize}
+    \item Composition $g \circ f: A \to D$ defined by $[g \circ f](x) = g(f(x))$
+    \item The composition of invertible mappings is invertible
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Inverse Image}
+For a mapping $f: A \to B$ and a set $E \subseteq B$:
+\begin{itemize}
+    \item $f^{-1}(E) = \{a \in A \mid f(a) \in E\}$
+    \item Useful properties:
+    \begin{align*}
+        f^{-1}(E_1 \cup E_2) &= f^{-1}(E_1) \cup f^{-1}(E_2) \\
+        f^{-1}(E_1 \cap E_2) &= f^{-1}(E_1) \cap f^{-1}(E_2) \\
+        f^{-1}(E_1 \setminus E_2) &= f^{-1}(E_1) \setminus f^{-1}(E_2)
+    \end{align*}
+\end{itemize}
+\end{definitionbox}
+
+\begin{definitionbox}{Function Restriction}
+For a mapping $f: A \to B$ and $A' \subseteq A$, the restriction of $f$ to $A'$, denoted $f\big|_{A'}$, is the mapping from $A'$ to $B$ which assigns $f(x)$ to each $x \in A'$.
+\end{definitionbox}
+
+\subsection{Equivalence Relations, Axiom of Choice, and Zorn's Lemma}
+
+\begin{definitionbox}{Cartesian Product}
+For non-empty sets $A$ and $B$, the Cartesian product $A \times B$ is the collection of all ordered pairs $(a,b)$ where $a \in A$ and $b \in B$, with $(a,b) = (a',b')$ if and only if $a = a'$ and $b = b'$.
+\end{definitionbox}
 
 \begin{definitionbox}{Relation}
-A relation $R$ on a set $X$ is a subset of $X \times X$. 
+For a non-empty set $X$, a relation $R$ on $X$ is a subset of $X \times X$. 
 \begin{itemize}
-    \item Reflexive: $\forall x \in X, xRx$
-    \item Symmetric: $x R y \implies y R x$
-    \item Transitive: $x R y \text{ and } y R z \implies x R z$
+    \item Reflexive: $xRx$ for all $x \in X$
+    \item Symmetric: $xRy \implies yRx$
+    \item Transitive: $xRy$ and $yRz \implies xRz$
 \end{itemize}
 \end{definitionbox}
 
 \begin{definitionbox}{Equivalence Relation}
-An equivalence relation is a relation that is reflexive, symmetric, and transitive.
+An equivalence relation $R$ on a set $X$ is a relation that is reflexive, symmetric, and transitive.
 
-For an equivalence relation $R$ on $X$:
-\begin{itemize}
-    \item Equivalence class of $x$: $[x]_R = \{y \in X \mid xRy\}$
-    \item Quotient set: $X/R = \{[x]_R \mid x \in X\}$
-\end{itemize}
+For $x \in X$, the equivalence class $R_x = \{x' \in X \mid xRx'\}$. 
+The collection of equivalence classes is denoted $X/R$.
 \end{definitionbox}
 
-\subsection{Axiom of Choice and Zorn's Lemma}
-
 \begin{definitionbox}{Choice Function}
-A choice function on a family $\mathcal{F}$ of non-empty sets is a function $f: \mathcal{F} \to \bigcup_{F \in \mathcal{F}} F$ such that $f(F) \in F$ for all $F \in \mathcal{F}$.
+Let $\mathcal{F}$ be a non-empty family of non-empty sets. A choice function $f$ on $\mathcal{F}$ is a function $f: \mathcal{F} \to \bigcup_{F\in\mathcal{F}}F$ such that $f(F) \in F$ for each $F \in \mathcal{F}$.
 \end{definitionbox}
 
 \begin{theorembox}{Axiom of Choice}
@@ -90,37 +147,26 @@ For any non-empty collection of non-empty sets, there exists a choice function.
 \end{theorembox}
 
 \begin{definitionbox}{Partial Ordering}
-A relation $\preceq$ on a set $X$ is a partial ordering if it is:
+A relation $R$ on a non-empty set $X$ is a partial ordering if it is:
 \begin{itemize}
-    \item Reflexive: $x \preceq x$
-    \item Antisymmetric: $x \preceq y \text{ and } y \preceq x \implies x = y$
-    \item Transitive: $x \preceq y \text{ and } y \preceq z \implies x \preceq z$
+    \item Reflexive: $x R x$
+    \item Antisymmetric: If $xRy$ and $yRx$, then $x = y$
+    \item Transitive: If $xRy$ and $yRz$, then $xRz$
 \end{itemize}
 \end{definitionbox}
 
 \begin{theorembox}{Zorn's Lemma}
-If a partially ordered set has an upper bound for every totally ordered subset, then it contains a maximal element.
+Let $X$ be a partially ordered set where every totally ordered subset has an upper bound. Then $X$ has a maximal member.
 \end{theorembox}
 
 \begin{note}
-Zorn's Lemma is equivalent to the Axiom of Choice and will be crucial in proving several important theorems in advanced mathematics.
+Zorn's Lemma is equivalent to the Axiom of Choice and will be crucial in proving important theorems such as the Hahn-Banach Theorem, the Tychonoff Product Theorem, and the Krein-Milman Theorem.
 \end{note}
 
-\subsection{Cardinality and Set Comparisons}
-
-\begin{definitionbox}{Cardinality}
-Two sets $A$ and $B$ are said to be equipotent (or have the same cardinality) if there exists a bijective mapping $f: A \to B$. 
-
-Key properties:
-\begin{itemize}
-    \item Equipotence is an equivalence relation on the collection of sets
-    \item $|A| = |B|$ if and only if there exists a bijection between $A$ and $B$
-    \item Finite sets have cardinality equal to the number of their elements
-\end{itemize}
+\begin{definitionbox}{Generalized Cartesian Product}
+For a collection of sets $\{E_{\lambda}\}_{\lambda\in\Lambda}$ parametrized by $\Lambda$, the Cartesian product $\prod_{\lambda\in\Lambda}E_{\lambda}$ is the set of functions $f: \Lambda \to \bigcup_{\lambda\in\Lambda}E_{\lambda}$ such that $f(\lambda) \in E_{\lambda}$ for each $\lambda \in \Lambda$.
 \end{definitionbox}
 
-\begin{theorembox}{Cantor-Bernstein Theorem}
-If there exist injective functions $f: A \to B$ and $g: B \to A$, then there exists a bijection between $A$ and $B$. 
-
-Symbolically, if $|A| \leq |B|$ and $|B| \leq |A|$, then $|A| = |B|$.
-\end{theorembox}
+\begin{note}
+The Axiom of Choice is equivalent to the assertion that the Cartesian product of a non-empty family of non-empty sets is non-empty.
+\end{note}
